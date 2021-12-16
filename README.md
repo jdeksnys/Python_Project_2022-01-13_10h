@@ -1,4 +1,4 @@
 # Remez Approximation Algorithm
 
 ## Additional variables
-example here
+a - coefficient of p(x) polynomial
