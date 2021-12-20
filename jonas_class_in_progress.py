@@ -23,7 +23,7 @@ class BestApprox:
 
         for i in range(self.max_iter+1):
 
-            Y=np.array([f(i) for i in self.reference])                                   # f(a) result matrix
+            Y=np.array([self.f(i) for i in self.reference])                                   # f(a) result matrix
             M=[]                                                                         # coefficient matrix (pre-calc). append()
             for count, j in enumerate(self.reference,start=0):
                 coeff_ls=[]
@@ -39,7 +39,7 @@ class BestApprox:
                 return sum(a*x**count for count,a in enumerate(X[:-1]))
             
             error_absolute_h=abs(X[-1])                                                  # deleted append(), set var. directly    
-            error=([abs(f(x)-p(x)) for x in np.linspace(self.lower,self.upper,100)])
+            error=([abs(self.f(x)-p(x)) for x in np.linspace(self.lower,self.upper,100)])
             max_error=max(error)
 
             if (max_error-error_absolute_h)<self.tol:
@@ -61,12 +61,12 @@ class BestApprox:
                 else:
                     self.reference.remove(self.reference[self.reference.index(eta)+1])
             if eta<self.reference[0]:
-                if ((f(eta)-p(eta))/(f(self.reference[0])-p(self.reference[0])))>0:
+                if ((self.f(eta)-p(eta))/(self.f(self.reference[0])-p(self.reference[0])))>0:
                     self.reference.remove(self.reference[0])
                 else:
                     self.reference.remove(self.reference[-1])
             if eta>self.reference[-1]:
-                if (f(eta)-p(eta))/(np.sign(f(self.reference[-1])-p(self.reference[-1])))>0:
+                if (self.f(eta)-p(eta))/(np.sign(self.f(self.reference[-1])-p(self.reference[-1])))>0:
                     self.reference.remove(self.reference[-1])
                 else:
                     self.reference.remove(self.reference[0])
@@ -89,4 +89,5 @@ class BestApprox:
 def f(x):
     return np.sin(x)
 
-a=BestApprox(f).remez(4,0,6)
+a=BestApprox(f)
+a.remez(4,0,6)
