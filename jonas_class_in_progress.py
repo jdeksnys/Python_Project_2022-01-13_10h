@@ -8,12 +8,6 @@ from datetime import datetime
 
 
 
-def f(x):
-    return np.sin(x)
-
-
-
-
 class BestApprox:
 
     def __init__(self,f):
@@ -22,14 +16,14 @@ class BestApprox:
         self.max_iter=10
 
     def remez(self,n,lower,upper):
-        self.n=n
+        self.n=n                                                                         # power of p(x)
         self.lower=lower
         self.upper=upper
         self.reference=list(np.linspace(self.lower,self.upper,n+2))
 
         for i in range(self.max_iter+1):
 
-            Y=np.array([f(i) for i in self.reference])                                        # f(a) result matrix
+            Y=np.array([f(i) for i in self.reference])                                   # f(a) result matrix
             M=[]                                                                         # coefficient matrix (pre-calc). append()
             for count, j in enumerate(self.reference,start=0):
                 coeff_ls=[]
@@ -41,7 +35,7 @@ class BestApprox:
             X=sp.solve(M,Y)                                                              # coefficient matrix (calculate)
 
 
-            def p(x):                                                                      # changed to sum()
+            def p(x):                                                                    # changed to sum()
                 return sum(a*x**count for count,a in enumerate(X[:-1]))
             
             error_absolute_h=abs(X[-1])                                                  # deleted append(), set var. directly    
@@ -49,7 +43,7 @@ class BestApprox:
             max_error=max(error)
 
             if (max_error-error_absolute_h)<self.tol:
-                print(f'convergense observaed after {i} iterations, the coefficients of the polynomial that is the best approx of f are:{X[:-2]}')
+                print(f'Converges after {i} iterations.\nCoefficients of p(x):{X[:-2]}')
                 # np.delete(M,1) ????????
                 break
 
@@ -61,7 +55,7 @@ class BestApprox:
             self.reference.sort()
 
 
-            if self.reference[0]<=eta<=self.reference[-1]:                                           # replace sign checking, faster
+            if self.reference[0]<=eta<=self.reference[-1]:                                # replace sign checking, faster
                 if (f(eta)-p(eta))/(f(self.reference[self.reference.index(eta)-1])-p(self.reference[self.reference.index(eta)-1]))>0:
                     self.reference.remove(self.reference[self.reference.index(eta)-1])
                 else:
