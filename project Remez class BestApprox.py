@@ -66,17 +66,17 @@ class BestApprox:
             
             
             if reference[0]<=eta<=reference[-1]:
-                if np.sign(f(eta)-p(eta))==np.sign(f(reference[reference.index(eta)-1])-p(reference[reference.index(eta)-1])):
+                if ((f(eta)-p(eta))/(f(reference[reference.index(eta)-1])-p(reference[reference.index(eta)-1])))>0:
                     reference.remove(reference[reference.index(eta)-1])
                 else:
                     reference.remove(reference[reference.index(eta)+1])
             elif eta<reference[0]:
-                if np.sign(f(eta)-p(eta))==np.sign(f(reference[0])-p(reference[0])):
+                if ((f(eta)-p(eta))/(f(reference[0])-p(reference[0])))>0:
                     reference.remove(reference[0])
                 else:
                     reference.remove(reference[-1])
             elif eta>reference[-1]:
-                if np.sign(f(eta)-p(eta))==np.sign(f(reference[-1])-p(reference[-1])):
+                if ((f(eta)-p(eta))/(f(reference[-1])-p(reference[-1])))>0:
                     reference.remove(reference[-1])
                 else:
                     reference.remove(reference[0])
