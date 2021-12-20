@@ -15,7 +15,8 @@ class BestApprox:
         self.tol=1.e-8
         self.max_iter=10
 
-    def remez(self,n,lower,upper):
+    def remez(self,n,list,lower,upper):
+
         self.n=n                                                                         # power of p(x)
         self.lower=lower
         self.upper=upper
@@ -44,7 +45,6 @@ class BestApprox:
 
             if (max_error-error_absolute_h)<self.tol:
                 print(f'Converges after {i} iterations.\nCoefficients of p(x):{X[:-2]}')
-                # np.delete(M,1) ????????
                 break
 
 
@@ -90,4 +90,4 @@ def f(x):
     return np.sin(x)
 
 a=BestApprox(f)
-a.remez(4,0,6)
+a.remez(1,2)
