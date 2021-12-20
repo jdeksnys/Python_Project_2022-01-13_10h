@@ -34,7 +34,7 @@ class BestApprox:
         
             for i in range(n+2):
                 M[i,0]=1
-                M[i,-1]=(-1)**i
+                M[i,-1]=(-1)**i 
             for i in range(n+2):
                 for j in range(1,n+1):
                     M[i,j]=(reference[i])**j
