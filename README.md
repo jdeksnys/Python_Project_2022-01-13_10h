@@ -1,9 +1,9 @@
 # Remez Approximation Algorithm
 
 ## Additional variables
-a - coefficient of p(x) polynomial;<br />
-self.name_dict - dictionary of value NAMES used in input prompt (lower, upper, n). Mapped to self.var_dict using variable names;<br />
-self.var_dict - dictionary of VALUES used to store input data (lower, upper, n);<br />
+**a** - coefficient of p(x) polynomial;<br />
+**self.name_dict** - dictionary of value NAMES used in input prompt (lower, upper, n). Mapped to self.var_dict using variable names;<br />
+**self.var_dict** - dictionary of VALUES used to store input data (lower, upper, n);<br />
 
 
 ## 2021-12-21 changes (jonas):
