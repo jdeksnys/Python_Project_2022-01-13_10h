@@ -8,6 +8,6 @@
 
 ## 2021-12-21 changes (jonas):
 1. Added self. where needed (ex.: self.f, self.reference);
-2. If initial reference points given (datatype 'list'!) when calling remez(), use that list (lower, upper, n sotred in self.var_dict);
+2. If initial reference points given (datatype 'list'!) when calling remez(), use that list (lower, upper, n stored in self.var_dict);
 3. If initial guesses not given, prompt user for input until correct data type given (numeric). Stored in self.var_dict;
 4. Degree of polynomial is stored in self.n for easier readability;
