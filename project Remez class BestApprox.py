@@ -106,12 +106,12 @@ class BestApprox:
             for i in range(1,self.n+1):
                 M[self.reference.index(eta),i]=(self.reference[self.reference.index(eta)])**i
     def plot_f_remez(self):
-         x=np.linspace(self.var_dict['lower'],self.var_dict['upper'],100)
+        x=np.linspace(self.var_dict['lower'],self.var_dict['upper'],100)
         plt.plot(x,self.f(x),'r',x,sum(self.a[i]*(x**i) for i in range(self.n+1)),'k:')
         plt.show()
 
 sin=BestApprox(f)
-sin.remez(reference_points) # with initial guess
+# sin.remez(reference_points) # with initial guess
 # sin.remez() # without initial guess (user input)
 # sin.plot_f_remez()
 
