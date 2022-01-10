@@ -11,17 +11,15 @@ import sys
 
 def f(x):
     return np.sin(x)
-lower=-np.pi
-upper=np.pi
-n=4
-reference_points=list(np.linspace(lower,upper,n+2))
+
+reference_points=list(np.linspace(0,2*np.pi,6))
 
 
 class BestApprox:
     tol=1.e-12
     max_iter=100
     a=[]
-    error_absolute_h=[]
+    
     def __init__(self,function):
         self.f=function
     def remez(self,reference=None):
@@ -49,6 +47,7 @@ class BestApprox:
             self.reference=list(np.linspace(self.var_dict['lower'],self.var_dict['upper'],self.n+2))
 
         error_absolute_h=[]
+        max_error_list=[]
         for i in range(self.max_iter):
             Y=np.array([self.f(i) for i in self.reference])
             M=np.zeros((self.n+2)**2).reshape(self.n+2,self.n+2)
@@ -69,13 +68,18 @@ class BestApprox:
             
             error=([abs(f(x)-p(x)) for x in np.linspace(self.var_dict['lower'],self.var_dict['upper'],100)])
             max_error=max(error)
+            max_error_list.append(max_error)
             if max_error-abs(X[-1])<self.tol:
                 
                 np.set_printoptions(precision=4)
                 print(f'convergense observed after {i+1} iterations, the coefficients of the polynomial that is the best approx of f are:{X[:-1]}')
                 
                 print([(p(self.reference[i])-self.f(self.reference[i])) for i in range(len(self.reference))])
-                print(error_absolute_h)
+                
+                plt.plot(range(1,len(max_error_list)+1),max_error_list,label='max error')
+                plt.plot(range(1,len(max_error_list)+1),error_absolute_h,label='h')
+                plt.xlabel('number of iterations')
+                plt.legend()
                 
                 self.a=X[:-1]
                 break
@@ -107,13 +111,17 @@ class BestApprox:
                 M[self.reference.index(eta),i]=(self.reference[self.reference.index(eta)])**i
     def plot_f_remez(self):
          x=np.linspace(self.var_dict['lower'],self.var_dict['upper'],100)
-        plt.plot(x,self.f(x),'r',x,sum(self.a[i]*(x**i) for i in range(self.n+1)),'k:')
-        plt.show()
+         plt.plot(x,self.f(x),'r',label='function')
+         plt.plot(x,sum(self.a[i]*(x**i) for i in range(self.n+1)),'k:',label='polynomial')
+         plt.legend()
+         plt.show()
 
 sin=BestApprox(f)
-sin.remez(reference_points) # with initial guess
+print(sin.remez(reference_points)) # with initial guess
 # sin.remez() # without initial guess (user input)
 # sin.plot_f_remez()
+plt.figure(2)
+print(sin.plot_f_remez())
 
     
 
