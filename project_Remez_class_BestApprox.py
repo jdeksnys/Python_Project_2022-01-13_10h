@@ -12,7 +12,8 @@ import sys
 def f(x):
     return np.sin(x)
 
-reference_points=list(np.linspace(0,2*np.pi,6))
+# reference_points=list(np.linspace(0,2*np.pi,6))
+# reference_points='a'
 
 
 class BestApprox:
@@ -27,7 +28,7 @@ class BestApprox:
         self.var_dict={'lower':None,'upper':None,'n':None}
         if reference!=None: # if initial guesses provided, utilise given list
             if not isinstance(reference,list):
-                print("Oops! Initial guess not of 'list' data type.")
+                raise TypeError("Oops! Initial guess not of 'list' data type.")
                 return
             else:
                 self.reference=reference
@@ -110,27 +111,18 @@ class BestApprox:
             for i in range(1,self.n+1):
                 M[self.reference.index(eta),i]=(self.reference[self.reference.index(eta)])**i
     def plot_f_remez(self):
-<<<<<<< HEAD
-        x=np.linspace(self.var_dict['lower'],self.var_dict['upper'],100)
-        plt.plot(x,self.f(x),'r',x,sum(self.a[i]*(x**i) for i in range(self.n+1)),'k:')
-        plt.show()
+            x=np.linspace(self.var_dict['lower'],self.var_dict['upper'],100)
+            plt.plot(x,self.f(x),'r',label='function')
+            plt.plot(x,sum(self.a[i]*(x**i) for i in range(self.n+1)),'k:',label='polynomial')
+            plt.legend()
+            # plt.show()
 
-sin=BestApprox(f)
-# sin.remez(reference_points) # with initial guess
-=======
-         x=np.linspace(self.var_dict['lower'],self.var_dict['upper'],100)
-         plt.plot(x,self.f(x),'r',label='function')
-         plt.plot(x,sum(self.a[i]*(x**i) for i in range(self.n+1)),'k:',label='polynomial')
-         plt.legend()
-         plt.show()
-
-sin=BestApprox(f)
-print(sin.remez(reference_points)) # with initial guess
->>>>>>> 01c97f76335f5bf98c0f15855d694ec0e1349e80
+# sin=BestApprox(f)
+# print(sin.remez(reference_points)) # with initial guess
 # sin.remez() # without initial guess (user input)
 # sin.plot_f_remez()
-plt.figure(2)
-print(sin.plot_f_remez())
+# plt.figure(2)
+# print(sin.plot_f_remez())
 
     
 
