@@ -72,9 +72,10 @@ class BestApprox:
             if max_error-abs(X[-1])<self.tol:
                 
                 np.set_printoptions(precision=4)
-                print(f'convergense observed after {i+1} iterations, the coefficients of the polynomial that is the best approx of f are:{X[:-1]}')
+                # print(f'convergense observed after {i+1} iterations, the coefficients of the polynomial that is the best approx of f are:{X[:-1]}')
                 
-                print([(p(self.reference[i])-self.f(self.reference[i])) for i in range(len(self.reference))])
+                self.h_vals=[(p(self.reference[i])-self.f(self.reference[i])) for i in range(len(self.reference))]
+                # print(self.h_vals)
                 
                 plt.plot(range(1,len(max_error_list)+1),max_error_list,label='max error')
                 plt.plot(range(1,len(max_error_list)+1),error_absolute_h,label='h')
