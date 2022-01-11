@@ -29,7 +29,6 @@ class BestApprox:
         if reference!=None: # if initial guesses provided, utilise given list
             if not isinstance(reference,list):
                 raise TypeError("Oops! Initial guess not of 'list' data type.")
-                return
             else:
                 self.reference=reference
                 self.var_dict['lower']=min(self.reference)
@@ -41,7 +40,7 @@ class BestApprox:
                     try:
                         self.var_dict[str(i)]=float(input(f'Please specify {self.name_dict[str(i)]}: '))
                     except ValueError:
-                        print('Oops! Input non-numeric! Try again')
+                        raise TypeError('Oops! Input non-numeric! Try again')
                     else:
                         break
             self.n=int(self.var_dict['n']) # for better readability, n will also be stored as attribute instead of dict.
