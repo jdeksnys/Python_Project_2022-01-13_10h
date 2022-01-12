@@ -116,14 +116,16 @@ class BestApprox:
             plt.plot(x,sum(self.a[i]*(x**i) for i in range(self.n+1)),'k:',label='polynomial')
             plt.legend()
             # plt.show()
-def f(x):#testing manually
-    func=[np.sin(x),np.cos(x),np.tan(x),np.arcsin(x),np.arccos(x),np.arctan(x)]
-    return func[1]
-if ValueError:
- reference_points=list(np.linspace(-2/np.pi,2/np.pi,6))
-elif IndexError:
-    reference_points=list(np.linspace(0,2*np.pi,4))
-    
+
+#def f(x):#testing manually
+#    func=[np.sin(x),np.cos(x),np.tan(x),np.arcsin(x),np.arccos(x),np.arctan(x)]
+#    return func[1]
+#if ValueError:
+# reference_points=list(np.linspace(-2/np.pi,2/np.pi,6))
+#elif IndexError:
+#    reference_points=list(np.linspace(0,2*np.pi,4))
+
+
 # sin=BestApprox(f)
 # print(sin.remez(reference_points)) # with initial guess
 # sin.remez() # without initial guess (user input)
